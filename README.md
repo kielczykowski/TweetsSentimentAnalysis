@@ -38,7 +38,26 @@ After that, the Tweets content will be sent to sentiment analysis. The response 
 
 
 ## Text Analytics Azure Services
+After getting data as JSONs, we can send them to sentiment analysis by Text Analytics Azure Services.
+Azure offers sentiment analysis  which provides API for detecting negative and positive sentiments. 
+AI models are provided by service, so we need just to send content to analysis. There are 3 labels: positive, negative and neutral. 
+If there is at least one negative sentence and at least positive sentence, API will return mixed sentence: 
 
+![alt text](https://github.com/kielczykowski/TweetsSentimentAnalysis/blob/twitter/docs/documentation/resources/sentence_analysis.png)
+
+Buliding an example query with some tweet text: 
+```
+{
+  "documents": [
+    {
+      "language": "en",
+      "id": "1",
+      "text": "Congratulations SpaceX Team!"
+    }
+  ]
+}
+```
+Analysis is performed upon receipt of the request. There is an limit of number of requests per second for each payment tier. Text analytics API is stateless, so no data is stored on Azure accound, so there is a need to store collected data from Azure text API.
 ## Data storage
 
 ## PowerApps reporting
