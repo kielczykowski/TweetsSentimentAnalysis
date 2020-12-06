@@ -1,3 +1,15 @@
+# Twitter API
+
+## Twitter API v1.1
+
+Information about Tweet's hashtags we can find in "entities" JSON field.
+API v1.1 provide searching by hashtags.
+Authorization realized by Bearer Token (form Developer portal).
+
+Subscriptions: https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/overview
+ 
+![](resources/hashtag_search.png)
+
 ## Twitter API v2
 
 Information about Tweet's hashtags we can find in "entities" JSON field.
