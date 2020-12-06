@@ -42,3 +42,10 @@ After that, the Tweets content will be sent to sentiment analysis. The response 
 ## Data storage
 
 ## PowerApps reporting
+
+We decided to created reports in PowerApps because:
+
+- it is easy to configure without writing a lot of code
+- integration with Azure Functions; they enable timer, data processing and web enpoint for service like solutions
+- has out of the box integration with Twitter and MS applications (can come in handy at some point)
+- easily expandable
