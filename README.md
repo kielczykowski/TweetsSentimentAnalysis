@@ -64,6 +64,8 @@ Buliding an example query with some tweet text:
 Analysis is performed upon receipt of the request. There is an limit of number of requests per second for each payment tier. Text analytics API is stateless, so no data is stored on Azure accound, so there is a need to store collected data from Azure text API.
 ## Data storage
 
+We would want to storage all data from specific tweets and the score of our sentiment analysis. Beacasue tweets are recived in JSON we were thinkig of using NoSQL database. Beacauce
+
 ## PowerApps reporting
 
 We decided to created reports in PowerApps because:
