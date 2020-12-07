@@ -18,6 +18,10 @@ Interpretation:
 - After receiving response, output data will be processed and combined with input tweet. In the end data is going to be added to database with all main extracted features
 - Finally reports will be created in PowerApps. With use of Azure Functions we can get all the changes made to database or sum up any information from given time interval. Use of PowerApps shortens development of UI leaving user with decent experience.
 
+## Azure architecture
+
+![](documentation/resources/schemat_blokowy_architektury.png)
+
 ## Data sources
 
 Information about Tweet's hashtags we can find in "entities" JSON field.
