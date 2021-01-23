@@ -1,1 +1,2 @@
 pymongo
+azure-ai-textanalytics==5.0.0
