@@ -16,7 +16,7 @@ class TwitterScraper:
         auth.set_access_token(api_token,  api_secret_token)
         self.api = tweepy.API(auth, wait_on_rate_limit=True)  # wait_on_rate_limit - waits until 15 minutes rate limit gets refreshed
 
-    def search(self, phrase="#fitness", since="2021-01-22"
+    def search(self, phrase="#najman", since=date.today().strftime("%Y-%m-%d")
             , until=(date.today() + timedelta(days=1)).strftime("%Y-%m-%d")  # until today excludes todays'tweets
             , tweets_number=10, tweet_mode='extended', language='pl'):
         found_tweets = []

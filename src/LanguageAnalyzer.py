@@ -6,6 +6,7 @@ from azure.core.credentials import AzureKeyCredential
 
 
 class LanguageAnalyzer(TextAnalyticsClient):
+
     def __init__(self, confidence_factor = 0.9, language='pl'):
         self.language_ = language
         self.confidence_ = confidence_factor
@@ -15,12 +16,18 @@ class LanguageAnalyzer(TextAnalyticsClient):
             credential=credentials
         )
 
+    def setLanguage(self, lang):
+        self.language_ = lang
+
+    def setConfidence(self, confidence):
+        self.confidence_ = confidence
+
     def extractLanguageDetections(self, detections):
         isSpecificLanguage = []
         for detection in detections:
             if detection.is_error is False:
                 if detection.primary_language.iso6391_name == self.language_ and \
-                detection.primary_language.confidence_score > self.confidence_:
+                detection.primary_language.confidence_score >= self.confidence_:
                     isSpecificLanguage.append(True)
                 else:
                     isSpecificLanguage.append(False)
