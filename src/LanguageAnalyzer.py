@@ -42,6 +42,9 @@ class LanguageAnalyzer(TextAnalyticsClient):
             return None
         pass
 
+    def analyzeSentiment(self, messages):
+        pass
+
 
 if __name__ == "__main__":
     language_analyzer = LanguageAnalyzer()
