@@ -11,7 +11,7 @@ hashtag_args.add_argument("language", type=str, help="'lang' tweet language is r
 
 
 class HashtagRestAPi(Resource):
-    def post(self, hashtag):
+    def get(self, hashtag):
         hashtag_args.parse_args()
         limit = request.args['limit']
         date = request.args['date']
