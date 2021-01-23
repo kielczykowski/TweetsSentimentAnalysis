@@ -9,7 +9,7 @@ class DatabaseHandler(MongoClient):
         url = os.environ["AZURE_DATABASE_URL"]
         super(DatabaseHandler, self).__init__(url)
 
-    def authenticate(self, db_name = "ey"):
+    def authenticate(self, db_name="ey"):
         username = os.environ["AZURE_DATABASE_USER"]
         password = os.environ["AZURE_DATABASE_PASSWORD"]
         db = getattr(self, db_name)
