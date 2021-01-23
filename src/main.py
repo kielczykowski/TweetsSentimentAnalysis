@@ -5,17 +5,17 @@ app = Flask(__name__)
 api = Api(app)
 
 hashtag_args = reqparse.RequestParser()
-hashtag_args.add_argument("date", type=str, help="Date is required.", required=True)
-hashtag_args.add_argument("limit", type=int, help="Amount of Tweets.", required=True)
-hashtag_args.add_argument("lang", type=str, help="Tweet language is required, e.g.: pl, en...", required=True)
+hashtag_args.add_argument("date", type=str, help="'date' parameter is required - date", required=True)
+hashtag_args.add_argument("limit", type=int, help="'limit' parameter is required - amount of Tweets.", required=True)
+hashtag_args.add_argument("language", type=str, help="'lang' tweet language is required, e.g.: pl, en...", required=True)
 
 
 class HashtagRestAPi(Resource):
     def post(self, hashtag):
         hashtag_args.parse_args()
-        date = request.form['date']
-        limit = request.form['limit']
-        lang = request.form['lang']
+        limit = request.args['limit']
+        date = request.args['date']
+        lang = request.args['language']
         #
         #
         # Processing...
