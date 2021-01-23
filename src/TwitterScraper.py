@@ -21,29 +21,21 @@ class TwitterScraper:
             , tweets_number=10, tweet_mode='extended', language='pl'):
         found_tweets = []
         for tweet in tweepy.Cursor(
-            self.api.search
-            , phrase
-            , since = since
-            , until=until, lang=language
-            , tweet_mode=tweet_mode).items(tweets_number):
-            # print('Hashtags: ', tweet.entities.get('hashtags'), '\nText: ', tweet.full_text,
-            # '\nLang: ', tweet.lang, '\nMetadata: ', tweet.metadata)
-            # print('\nNowy tweet:\n')
-            # print('Hashtags: ', tweet.entities.get('hashtags'))
-            # print('Created_at: ', tweet.created_at, type(tweet.created_at))
-            # print('id: ', tweet.id, type(tweet.id))
-            # print('place: ', tweet.place, type(tweet.place))
-            # print('\n DIR: ', dir(tweet))
+                self.api.search
+                , phrase
+                , since = since
+                , until=until, lang=language
+                , tweet_mode=tweet_mode).items(tweets_number):
             temp = {}
-            temp["twitter"] = {}
+            temp["id"] = tweet.id
+            temp["query"] = phrase
+            temp["creationTime"] = str(tweet.created_at)
             if 'retweeted_status' in dir(tweet):
                 temp["text"] = tweet.retweeted_status.full_text
             else:
                 temp["text"] = tweet.full_text
 
-            temp["id"] = tweet.id
-            temp["query"] = phrase
-            temp["creationTime"] = str(tweet.created_at)
+            temp["twitter"] = {}
             temp["twitter"]["detectedLanguage"] = tweet.lang
             temp["twitter"]["hashtags"] = tweet.entities.get('hashtags')
             if tweet.place is not None:
@@ -52,8 +44,8 @@ class TwitterScraper:
                 }
                 temp["twitter"]["place"]["coordinatesType"] = tweet.place.bounding_box.type
                 temp["twitter"]["place"]["coordinates"] = tweet.place.bounding_box.coordinates
-
             found_tweets.append(temp)
+
         self.found_tweets = found_tweets
         return found_tweets
 
