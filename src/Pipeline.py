@@ -17,7 +17,8 @@ class Pipeline:
                 since_date=date.today().strftime("%Y-%m-%d"),
                 until_date=(date.today() + timedelta(days=1)).strftime("%Y-%m-%d")):
 
-        # TODO handle empty/null hashtag and language
+        # TODO handle empty/null hashtag and language input
+
         # SEARCHING FOR TWEETS
         found_tweets = self.twitter_.search(
             phrase=hashtag
@@ -27,14 +28,8 @@ class Pipeline:
             , tweets_number = number_of_tweets
         )
 
-        # DOUBLE CHECK IF TEXT IS IN SPECIFIED TEXT
+        # DOUBLE CHECK IF TEXT IS IN SPECIFIED LANGUAGE
         extracted_text_list = [element["text"] for element in found_tweets]
-
-        print("Extracted Text ", len(extracted_text_list))
-        for i, element in enumerate(extracted_text_list):
-            print(i)
-            print(element)
-            print(found_tweets[i]["twitter"]["detectedLanguage"])
 
         # set language of analysis and confidence of classification
         self.analyzer_.setLanguage(language)
@@ -43,34 +38,31 @@ class Pipeline:
         language_detector_result = self.analyzer_.detectLanguage(extracted_text_list)
         does_language_match = self.analyzer_.extractLanguageDetections(language_detector_result)
 
-        print("Does language match ", len(does_language_match))
-        for i, element in enumerate(does_language_match):
-            print(i)
-            print(element)
+        # Azure and Twitter language detection must match(2 factor certainty)
+        found_tweets = [
+            element for i,element in enumerate(found_tweets) \
+            if does_language_match[i] and found_tweets[i]["twitter"]["detectedLanguage"]==language
+        ]
 
-        # TODO think do what do we want: OR vs AND (2 factor certainty)
-        # print("Azure OR Twitter Language")
-        # for i, element in enumerate(does_language_match):
-        #     print(i)
-        #     print(element or found_tweets[i]["twitter"]["detectedLanguage"]=='pl')
-
-        # print("Azure AND Twitter Language")
-        # for i, element in enumerate(does_language_match):
-        #     print(i)
-        #     print(element and found_tweets[i]["twitter"]["detectedLanguage"]=='pl')
-
-        # SPACY ANALYSIS
+        # TODO DELETE HTTPS/LINKS FROM TWEETS
 
 
-        analysis_output = found_tweets
-        # SENTIMENT ANALYSIS
+        # TODO TRANSLATION TO ENGLISH
 
 
+        # TODO SPACY ANALYSIS
 
-        # DATABASE HANDLING
+
+        # additional variable for database usage
+        # analysis_output = found_tweets
+
+        # TODO SENTIMENT ANALYSIS + CLASSIFICATION
+
+
+        # TODO? DATABASE HANDLING
         # self.database_.addMultipleDocuments("showcase", analysis_output)
 
-        # RETURN API REQUEST OBJECTS
+        # TODO RETURN API REQUEST OBJECTS
 
 
 if __name__ == "__main__":

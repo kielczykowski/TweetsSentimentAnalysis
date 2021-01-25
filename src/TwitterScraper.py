@@ -52,7 +52,7 @@ class TwitterScraper:
 
 if __name__ == "__main__":
     search = TwitterScraper()
-    tweets = search.search()
+    tweets = search.search(phrase = '#biedronka', since="2021-01-10")
     print("\nreturned object\n")
     for element in tweets:
         print(element)

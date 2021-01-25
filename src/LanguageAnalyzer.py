@@ -49,6 +49,7 @@ class LanguageAnalyzer(TextAnalyticsClient):
             return None
         pass
 
+    # TODO bound with SENTIMENT ANALYSIS + CLASSIFICATION
     def analyzeSentiment(self, messages):
         pass
 
@@ -59,7 +60,8 @@ if __name__ == "__main__":
         "Lecymy dur wdupiamy żur #masno #gang",
         "Stanoski... #Najman",
         "4 piwa w cenie 1 tylko w #Biedronka",
-        "Halo ludzie przecież tu nikogo nie ma. #Najman",
+        "#Najman to super pozytywny gość",
         "#EYPolska"
     ])
-    print(language_analyzer.extractLanguageDetections(x))
+    for element in x:
+        print(element)
