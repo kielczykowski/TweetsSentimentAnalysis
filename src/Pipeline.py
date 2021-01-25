@@ -53,7 +53,7 @@ class Pipeline:
         # TODO TRANSLATION TO ENGLISH
         for element in found_tweets:
             element['translated_text'] = self.translator.translate(element['text'])
-            element['translated_tag'] = self.translator.translate(element['twitter']['hashtags'][0]['text'])
+            element['translated_tag'] = self.translator.translate(hashtag[1:len(hashtag)])
 
         # TODO SPACY ANALYSIS
         print(found_tweets[0]['translated_text'],found_tweets[0]['translated_tag'])
