@@ -3,6 +3,8 @@ from TwitterScraper import TwitterScraper
 from DatabaseHandler import DatabaseHandler
 from LanguageAnalyzer import LanguageAnalyzer
 from datetime import date, timedelta
+from Translation import Translator
+from frazes_extraction_spacy import Extractor
 
 class Pipeline:
 
@@ -11,6 +13,8 @@ class Pipeline:
         self.analyzer_ = LanguageAnalyzer()
         self.database_ = DatabaseHandler()
         self.database_.authenticate(db_name="ey")
+        self.translator = Translator()
+        self.extractor = Extractor()
 
     # call this method after calling the API
     def singleLoop(self, hashtag, language, language_confidence=0.9, number_of_tweets=100,
@@ -46,11 +50,15 @@ class Pipeline:
 
         # TODO DELETE HTTPS/LINKS FROM TWEETS
 
-
         # TODO TRANSLATION TO ENGLISH
-
+        for element in found_tweets:
+            element['translated_text'] = self.translator.translate(element['text'])
+            element['translated_tag'] = self.translator.translate(element['twitter']['hashtags'][0]['text'])
 
         # TODO SPACY ANALYSIS
+        print(found_tweets[0]['translated_text'],found_tweets[0]['translated_tag'])
+        for element in found_tweets:
+            element['frazes_to_sentiment_analysis'] = self.extractor.getPhrases(element['translated_text'], element['translated_tag'])
 
 
         # additional variable for database usage
