@@ -65,7 +65,8 @@ class Pipeline:
         # analysis_output = found_tweets
 
         # TODO SENTIMENT ANALYSIS + CLASSIFICATION
-
+        messages = []
+        self.analyzer_.analyzeSentiment(messages)
 
         # TODO? DATABASE HANDLING
         # self.database_.addMultipleDocuments("showcase", analysis_output)
