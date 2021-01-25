@@ -1,12 +1,12 @@
 import requests, uuid, json
 
 # Add your subscription key and endpoint
-subscription_key = "YOUR_SUBSCRIPTION_KEY"
+subscription_key = "88390c3221394049b65cbd0297e94b79"
 endpoint = "https://api.cognitive.microsofttranslator.com"
 
 # Add your location, also known as region. The default is global.
 # This is required if using a Cognitive Services resource.
-location = "YOUR_RESOURCE_LOCATION"
+location = "westeurope"
 
 path = '/translate'
 constructed_url = endpoint + path
@@ -27,8 +27,7 @@ headers = {
 
 # You can pass more than one object in body.
 body = [{
-    'tag': '', #tu należy podać tag
-    'text': '' #tu należy podać treść tweeta
+    'text': 'Iga Świątek wygrała Roland Garross.' #tu należy podać treść tweeta lub treść taga. Raczej trzeba to robić osobno
 }]
 
 request = requests.post(constructed_url, params=params, headers=headers, json=body)
