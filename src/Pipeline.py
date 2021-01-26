@@ -56,17 +56,15 @@ class Pipeline:
             element['translated_tag'] = self.translator.translate(hashtag[1:len(hashtag)])
 
         # TODO SPACY ANALYSIS
-        print(found_tweets[0]['translated_text'],found_tweets[0]['translated_tag'])
+        print(found_tweets[0]['translated_text'], found_tweets[0]['translated_tag'])
         for element in found_tweets:
-            element['frazes_to_sentiment_analysis'] = self.extractor.getPhrases(element['translated_text'], element['translated_tag'])
+            element['frazes_to_sentiment_analysis'] = self.extractor.getPhrases(element['translated_text'],
+                                                                                element['translated_tag'])
+            # additional variable for database usage
+            # analysis_output = found_tweets
 
-
-        # additional variable for database usage
-        # analysis_output = found_tweets
-
-        # TODO SENTIMENT ANALYSIS + CLASSIFICATION
-        messages = []
-        self.analyzer_.analyzeSentiment(messages)
+            # TODO SENTIMENT ANALYSIS + CLASSIFICATION
+            element["sentiment_analysis"] = self.analyzer_.analyzeSentiment(element['frazes_to_sentiment_analysis'])
 
         # TODO? DATABASE HANDLING
         # self.database_.addMultipleDocuments("showcase", analysis_output)
