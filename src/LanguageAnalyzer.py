@@ -51,7 +51,9 @@ class LanguageAnalyzer(TextAnalyticsClient):
 
     # TODO bound with SENTIMENT ANALYSIS + CLASSIFICATION
     def analyzeSentiment(self, messages):
-        message_sentiment = {}
+        analyze_sentiment_response = {}
+        sentence_sentiment = {}
+        sentence_list = []
 
         try:
             response = self.analyze_sentiment(documents=messages)
@@ -77,20 +79,43 @@ class LanguageAnalyzer(TextAnalyticsClient):
                 sentence.confidence_scores.positive,
                 sentence.confidence_scores.neutral,
                 sentence.confidence_scores.negative,
-
             ))
 
-            highest_sentiment_score = max(
-                sentence.confidence_scores.positive,
-                sentence.confidence_scores.neutral,
-                sentence.confidence_scores.negative)
+            item_sentiment_score = self.calcSentimentScore(sentence.confidence_scores)
+            item_sentiment = self.defineSentiment(item_sentiment_score)
 
-            message_sentiment["id"] = idx + 1
-            message_sentiment["text"] = sentence.text
-            message_sentiment["sentimentScore"] = highest_sentiment_score
-            message_sentiment["sentiment"] = sentence.sentiment
+            sentence_sentiment["text"] = sentence.text
+            sentence_sentiment["sentimentScore"] = item_sentiment_score
+            sentence_sentiment["sentiment"] = item_sentiment
 
-        return message_sentiment
+            sentence_list.append(sentence_sentiment)
+
+        sentiment_score = self.avg(sentence_list)
+        sentiment = self.defineSentiment(sentiment_score)
+
+        analyze_sentiment_response["sentimentScore"] = sentiment_score
+        analyze_sentiment_response["sentiment"] = sentiment
+        analyze_sentiment_response["itemList"] = sentence_list
+
+        return analyze_sentiment_response
+
+    def calcSentimentScore(self, confidence_scores):
+        return (-1 * confidence_scores.negative) + (1 * confidence_scores.positive)
+
+    def defineSentiment(self, score):
+        if score <= -0.4:
+            return "negative"
+        elif score >= 0.4:
+            return "positive"
+        else:
+            return "neutral"
+
+    @staticmethod
+    def avg(item_list):
+        sum_score = 0
+        for item in enumerate(item_list):
+            sum_score += item_list["sentimentScore"]
+        return sum_score / len(item_list)
 
 
 if __name__ == "__main__":
