@@ -51,8 +51,8 @@ class Pipeline:
             if does_language_match[i] and found_tweets[i]["twitter"]["detectedLanguage"]==language
         ]
 
-        for element in found_tweets:
-            element['text'] = re.sub(r'http\S+', '', element['text'])
+        for single_tweet in found_tweets:
+            single_tweet['text'] = re.sub(r'http\S+', '', single_tweet['text'])
 
         # TODO TRANSLATION TO ENGLISH
         for element in found_tweets:
