@@ -24,7 +24,9 @@ class Pipeline:
                 since_date=date.today().strftime("%Y-%m-%d"),
                 until_date=(date.today() + timedelta(days=1)).strftime("%Y-%m-%d")):
 
-        # TODO handle empty/null hashtag and language input
+        # check language and hashtag fields from request
+        if not hashtag or not language:
+            raise Exception('Language and hashtag cannot be empty.')
 
         # SEARCHING FOR TWEETS
         found_tweets = self.twitter_.search(
@@ -51,6 +53,7 @@ class Pipeline:
             if does_language_match[i] and found_tweets[i]["twitter"]["detectedLanguage"]==language
         ]
 
+        # remove urls
         for single_tweet in found_tweets:
             single_tweet['text'] = re.sub(r'http\S+', '', single_tweet['text'])
 
