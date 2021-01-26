@@ -6,6 +6,9 @@ from datetime import date, timedelta
 from Translation import Translator
 from frazes_extraction_spacy import Extractor
 
+import re
+
+
 class Pipeline:
 
     def __init__(self):
@@ -48,7 +51,8 @@ class Pipeline:
             if does_language_match[i] and found_tweets[i]["twitter"]["detectedLanguage"]==language
         ]
 
-        # TODO DELETE HTTPS/LINKS FROM TWEETS
+        for element in found_tweets:
+            element['text'] = re.sub(r'http\S+', '', element['text'])
 
         # TODO TRANSLATION TO ENGLISH
         for element in found_tweets:
