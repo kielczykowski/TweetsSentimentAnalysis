@@ -1,0 +1,99 @@
+atrybuty doc:
+-sent: wyznacza zdania
+-text: treść słowa
+-head: słowo określane przez to słowo
+-ent_type_: określenie kategorii nazwy własnej
+-lemma_: forma podstawowa wyrazu
+-pos_: cześć mowy
+-tag_: część zdania (coś w tym stylu)
+-dep_: relacja ze słowem head
+
+POS: słownik
+
+    ADJ: adjective - przymiotnik (jaka?jaki?jakie?który?która?które?)
+    ADP: adposition - przyimek (z, do, na, bez, za, pod, u, w, nad, o, od, po, znad, poprzez)
+    ADV: adverb - przysłówek (jak? gdzie? kiedy?)
+    AUX: auxiliary verb - czasownik posiłkowy (być lub został w formie biernej)
+    CONJ: coordinating conjunction - spójnik współrzędny (spójnik w zdaniach równorzędnych: i, lub, więc)
+    DET: determiner - okreśnik - chyba nie ma tego po polsku, a po angielsku: a, the, this, those, three, fifty, most, any, each
+    INTJ: interjection - wykrzyknik
+    NOUN: noun - rzeczownik
+    NUM: numeral - liczebnik (ile? itp.)
+    PART: particle - partykuła (razy, tylko, nie, by, czy, tak, bodajże, się, oby)
+    PRON: pronoun - zaimek (tamten, tu, mój, ty, nasz, kiedyś, tyle, ile)
+    PROPN: proper noun - nazwa własna
+    PUNCT: punctuation - interpunkcja
+    SCONJ: subordinating conjunction - spójnik podrzędny (ponieważ, dlatego, gdyby)
+    SYM: symbol - symbol
+    VERB: verb - czasownik
+    X: other - inne
+
+DEP: słownik
+    acomp: adjectival complement - odpopwiednik przysłowka (dopełnienie przymiotnikowe czasownika) np. "One wyglada bardzo ładnie" (acomp: wygląda, ładnie) +
+    advcl: adverbial clause modifier - modyfikator zdania przysłówkowego np. "Wypadek zdarzył się, gdzy zapadała noc." (advcl: zdarzył się, zapadała) -
+    advmod: adverb modifier - modyfikator przysłowka lub fraza kóra służy do modycikacji znaczenia słowa np. "żywnośc modyfikowana genetycznie" (advmod: modyfikowana, genetycznie) +
+    agent: agent - uzupełnienie strony biernej czasownika, jako podmiot wykonujący akcję np. "Ten facet został zabity  przez policję", "Efekty spwodowane przez bialko są ważne" (agent: zabity, policję) (agent: spowodowane, białko)
+    amod: adjectival modifier - modyfikator przymiotnikowy, dowolna fraza przymiotnikowa, która określa rzeczownik np. "Sam dostał 3 milony dolarów pożyczki" (amod: dolaów, pożyczki), "Sam je czerowne mięso" (amod: czerowne, mięso)
+    appos: appositional modifier - słowo służace do określenia, zdefiniowana np. "Karol, mój brat, ... "(appos: Karol, brat)
+    aux: auxiliary - zależność do czasownika modalnego (mieć, musieć, powinieneś) np. "On powinień wyjść" (aux: powinień, wyjść)
+    auxpass: passive auxiliary - to samo co aux, ale w formie biernej np. "Kennedy został zabity" (auxpass: zabity, został)
+    cc: coordinator - relacja między elementem spójnika a koordynującym słowem koninunkcyjnym spójnik xdd np. "Bill jest duży i uczciwy" (cc: duży, i), "I wtedy my wyszliśmy" (cc: wyszliśmy i)
+    ccomp: clausal complement - 
+    conj: conjunct - relacja pomiędzy słowami przedzielonymi spójnikiem np. "Bill jest duży i uczciwy." (conj: duży, uczciwy)
+    cop: copula - relacja miedzy dopełnienim czasownika kopularnego a czasownikiem kopularnym np. "Bill jest duży" (cop: duży, jest)
+    csubj: clausal subject - pormiot klauzulowy, dopełenie czasownika kopularnego np. "To co powiedziała ma sens "(scubj:ma, powiedziała), "To co powiedziała nie jest prawdą" (scubj: prawdą, powiedziała)
+    csubjpass: clausal passive subject - np. "To że kłamie, było przypuszczene przez wszystkich" (csubjpass: przypuszczane, kłamie)
+    dep: dependent - system nie możę dokąłdnie określić zależności lub zależność jest zbyt powiązana np. "A potem, jakby chciał pokazać, że może..." (dep: pokazać, jakby)
+    det: determiner - zależnośc miedzy rzeczownikiem a determinatorem xd np. "Ten facet jest tutaj" (det: facet, ten), "Którą książkę wolisz?" (det: książkę, którą)
+    discourse: discourse element - relacja służaca do określenie wykrzykników (oh, uh-huh, Witajcie), wypełniaczy(hmm, mhm, oh) i innych niezdefiniowanych części mowy np. "Wojtek jest w Niemczech :)" (discourse: is, :) )
+    dobj: direct object - dopełnienie czasownika jako fraza rzeczownikowa np. "Ona dała mi podwyżkę" (dobj: dała, podwyżkę), "Oni wygrywają loterię" (dobj: wygrywają, loterię)
+    expl: expletive - relacja typu "tam jest", "tam są"
+    goeswith: goes with - relacja łaćzy dwie części słowa, kóre są oddzielone tekstem (w angielskim np. sort sth out). 
+    iobj: indirect object - fraza rzeczownikowa w celowniku, która jest dopełnieniem czasownika np. "One dala mi podwyżkę" (iobj: dałą, mi)
+    mark: marker - słowo wprowadzające zdanie skończone podrzędnie względem innego zdania. np. "On powiedział, że ty lubisz pływać" (mark: że, pływać)
+    mwe: multi-word expression - wyrażenie wielowyrazowe np. "z powodu" (mwe: z, powodu), "tak dobrze jak" (mwe: dobrze, jak) ????
+    neg: negation modifier - relacja między słowem negacji a słowem, które modyfikuje np. "Bill nie jest naukowcem" (neg: naukowcem, nie),  "Bill nie kieruje" (neg: kieruje, nie)
+    
+    nn: noun compound modifier - rzeczownik określający rzeczownik np. Cena ropy, droga życia
+    npadvmod: noun phrase as adverbial modifier - rzeczownik + przymiotnik, który określa raze coś innego
+    nsubj: nominal subject - często związek podmiotu i orzeczenia, ale też rzeczownik z przymiotnikiem wtedy kiedy jedyną funkcją czasownika jest łączenie. przykładowo miód jest słodki, potrawka pachnie dobrze, mleko zrobiło się kwaśne
+    nsubjpass: passive nominal subject - to co wyżej tylko strona bierna
+    num: numeric modifier - połącznie liczby i rzeczownika np. trzy gruszki, dwie pietruszki
+    number: element of compound number - połączenie pomiędzy liczbami do których zapisu słownego potrzeba więcej niż jednego wyrazu, np. trzy tysiące, dwa miliony
+    parataxis: parataxis - (chyba) połącznie czasowników w zdaniach równorzędnych
+    -pcomp: prepositional complement - słyszałem "o" tym, że "opowiadasz",
+    pobj: object of a preposition - rzeczownik i przyimek, np. na stole, z bratem
+    poss: possession modifier - rzeczownik i wyraz określający czyja to własność np. torebka mamy, ich własność
+    possessive: possessive modifier - po polsku tego nie ma, np. Bill's, (Bill, 's)
+    preconj: preconjunct - każdy, żaden, obaj + rzeczownik
+    predet: predeterminer - połaczenie rzeczownika i wyrazu, który zmienia jego znacznie
+    prep: prepositional modifier - przyimek + wyraz
+    prepc: prepositional clausal modifier - czasownik + imiesłów odczasownikowy, np. kupił płacąc, trzymał robiąc
+    prt: phrasal verb particle - zestawienie słów, które razem mają inne znaczenie niż osobno
+    punct: punctuation - połącznie znaku interpunkcyjnego i słowa
+    quantmod: quantifier phrase modifier - połączenie słów zktórych jedno modyfikuje znaczenie drugiego, a ten drugi określa jakąś wielkość: około dwustu, ponad pięć
+    rcmod: relative clause modifier - rzeczownik + wyraz, czasownik, który go dokładnie określa, np. osoba którą lubisz, pies ktory szczeka
+    ref : referent - np. osoba która, miejsce gdzie itp.
+    root: root - główne słowo w zdaniu, jest to zazwyczaj orzeczenie z nsubj, albo jego zaminnenik
+    tmod: temporal modifier - czasownik plus określenie kiedy, np. pływałam wczoraj
+    vmod: reduced non-finite verbal modifier - to be plus rzeczownik, np. coś do zrobienia, nic do powiedzenia
+    xcomp: open clausal complement - czasownik + dopełnienie, np. lubię pływać, uważam go za głupca, sadzę że jest uczciwy
+    xsubj: controlling subject - podobne do poprzedniego (nie widzę róznicy)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
