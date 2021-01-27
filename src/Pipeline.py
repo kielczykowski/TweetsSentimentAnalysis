@@ -56,6 +56,8 @@ class Pipeline:
         # remove urls
         for single_tweet in found_tweets:
             single_tweet['text'] = re.sub(r'http\S+', '', single_tweet['text'])
+            single_tweet['text'].replace('@', '')
+            single_tweet['text'].replace('#', '')
 
         # TODO TRANSLATION TO ENGLISH
         for element in found_tweets:
