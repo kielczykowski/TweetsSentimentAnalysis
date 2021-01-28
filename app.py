@@ -1,10 +1,11 @@
 from flask import Flask, request
 from flask_restful import Api, Resource, reqparse
-
+from flask_cors import CORS
 from src.Pipeline import Pipeline
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 hashtag_args = reqparse.RequestParser()
 

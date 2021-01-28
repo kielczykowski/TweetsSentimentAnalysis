@@ -5,6 +5,7 @@ requests==2.25.1
 spacy==2.3.5
 Flask==1.1.2
 Flask-RESTful==0.3.8
+flask-cors==3.0.10
 setuptools==52.0.0
 wheel==0.36.2
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.1/en_core_web_sm-2.3.1.tar.gz
