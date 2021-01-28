@@ -129,14 +129,17 @@ class LanguageAnalyzer(TextAnalyticsClient):
     def avg(item_list):
         if len(item_list) != 0:
             sum_score = 0
+            weight = 0
             for item in item_list:
-                # neutral phrase has lower weight: <0.3 * score>
+                # neutral phrase has lower weight: 0.3
                 if item["sentiment"] == "neutral":
-                    sum_score += 0.3 * item["sentimentScore"]
+                    sum_score += item["sentimentScore"]
+                    weight += 0.3
                 else:
                     sum_score += item["sentimentScore"]
+                    weight += 1
 
-            return sum_score / len(item_list)
+            return sum_score / weight
 
 
 if __name__ == "__main__":
