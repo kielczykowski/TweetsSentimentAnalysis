@@ -1,5 +1,4 @@
 import requests
-import uuid
 
 from src.config import config
 
@@ -34,7 +33,6 @@ class Translator:
             'Ocp-Apim-Subscription-Key': self.subscription_key,
             'Ocp-Apim-Subscription-Region': self.location,
             'Content-type': 'application/json',
-            'X-ClientTraceId': str(uuid.uuid4())
         }
 
         # You can pass more than one object in body.
