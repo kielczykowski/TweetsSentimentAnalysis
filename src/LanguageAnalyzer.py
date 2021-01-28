@@ -49,55 +49,70 @@ class LanguageAnalyzer(TextAnalyticsClient):
             return None
         pass
 
-    # TODO bound with SENTIMENT ANALYSIS + CLASSIFICATION
     def analyzeSentiment(self, messages):
-        analyze_sentiment_response = {}
-        sentence_sentiment = {}
-        sentence_list = []
+        if len(messages) == 0:
+            return {}
 
         try:
-            response = self.analyze_sentiment(documents=messages)
+            response_array = self.analyze_sentiment(documents=messages)
+            if response_array is None:
+                print("AnalyzeSentiment response is None.")
+                return None
         except Exception as err:
             print("Encountered exception. {}".format(type(err)))
             return None
 
-        if response is None:
-            print("AnalyzeSentiment response is None.")
-            return None
+        return self.response_analyze(response_array)
 
-        print("Document Sentiment: {}".format(response.sentiment))
-        print("Overall scores: positive={0:.2f}; neutral={1:.2f}; negative={2:.2f} \n".format(
-            response.confidence_scores.positive,
-            response.confidence_scores.neutral,
-            response.confidence_scores.negative,
-        ))
+    def response_analyze(self, response_array):
+        sentence_list = []
+        analyze_sentiment_response = {}
+        analyze_sentiment_response_list = []
 
-        for idx, sentence in enumerate(response.sentences):
-            print("Sentence: {}".format(sentence.text))
-            print("Sentence {} sentiment: {}".format(idx + 1, sentence.sentiment))
-            print("Sentence score:\nPositive={0:.2f}\nNeutral={1:.2f}\nNegative={2:.2f}\n".format(
-                sentence.confidence_scores.positive,
-                sentence.confidence_scores.neutral,
-                sentence.confidence_scores.negative,
+        for phrases in response_array:
+            print("--------------------START_SENTIMENT_ANALYZE----------------------------")
+            print("Azure Document Sentiment: {}".format(phrases.sentiment))
+            print("Overall scores: positive={0:.2f}; neutral={1:.2f}; negative={2:.2f}".format(
+                phrases.confidence_scores.positive,
+                phrases.confidence_scores.neutral,
+                phrases.confidence_scores.negative,
             ))
+            print("---------------------------------")
 
-            item_sentiment_score = self.calcSentimentScore(sentence.confidence_scores)
-            item_sentiment = self.defineSentiment(item_sentiment_score)
+            for idx, sentence in enumerate(phrases.sentences):
+                print("Sentence: {}".format(sentence.text))
+                print("Sentence {} sentiment: {}".format(idx + 1, sentence.sentiment))
+                print("Sentence score:\nPositive={0:.2f}\nNeutral={1:.2f}\nNegative={2:.2f}".format(
+                    sentence.confidence_scores.positive,
+                    sentence.confidence_scores.neutral,
+                    sentence.confidence_scores.negative,
+                ))
+                print("---------------------------------")
 
-            sentence_sentiment["text"] = sentence.text
-            sentence_sentiment["sentimentScore"] = item_sentiment_score
-            sentence_sentiment["sentiment"] = item_sentiment
+                item_sentiment_score = self.calcSentimentScore(sentence.confidence_scores)
+                item_sentiment = self.defineSentiment(item_sentiment_score)
 
-            sentence_list.append(sentence_sentiment)
+                sentence_sentiment = {}
+                sentence_sentiment["text"] = sentence.text
+                sentence_sentiment["sentimentScore"] = item_sentiment_score
+                sentence_sentiment["sentiment"] = item_sentiment
 
-        sentiment_score = self.avg(sentence_list)
-        sentiment = self.defineSentiment(sentiment_score)
+                sentence_list.append(sentence_sentiment)
 
-        analyze_sentiment_response["sentimentScore"] = sentiment_score
-        analyze_sentiment_response["sentiment"] = sentiment
-        analyze_sentiment_response["itemList"] = sentence_list
+            sentiment_score = self.avg(sentence_list)
+            sentiment = self.defineSentiment(sentiment_score)
 
-        return analyze_sentiment_response
+            analyze_sentiment_response["sentimentScore"] = sentiment_score
+            analyze_sentiment_response["sentiment"] = sentiment
+            analyze_sentiment_response["itemList"] = sentence_list
+
+            print("Final Mesagges Sentiment: {}".format(sentiment))
+            print("Overall scores: score={0:.2f}".format(sentiment_score))
+
+            analyze_sentiment_response_list.append(analyze_sentiment_response)
+
+        print("-----------------------------END---------------------------------------\n")
+        return analyze_sentiment_response_list
 
     def calcSentimentScore(self, confidence_scores):
         return (-1 * confidence_scores.negative) + (1 * confidence_scores.positive)
@@ -112,10 +127,19 @@ class LanguageAnalyzer(TextAnalyticsClient):
 
     @staticmethod
     def avg(item_list):
-        sum_score = 0
-        for item in enumerate(item_list):
-            sum_score += item_list["sentimentScore"]
-        return sum_score / len(item_list)
+        if len(item_list) != 0:
+            sum_score = 0
+            weight = 0
+            for item in item_list:
+                # neutral phrase has lower weight: 0.3
+                if item["sentiment"] == "neutral":
+                    sum_score += item["sentimentScore"]
+                    weight += 0.3
+                else:
+                    sum_score += item["sentimentScore"]
+                    weight += 1
+
+            return sum_score / weight
 
 
 if __name__ == "__main__":
