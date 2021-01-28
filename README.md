@@ -21,7 +21,7 @@ Azure services are used to complete the following tasks:
 
 In original we thought about sending output of analysis to Cosmos DB, but in the end we decided to compute outcome and send it back to user as service is being called.
 
-Original Architecture looked like the following one 
+Original Architecture looked like the following one
 
 ![](documentation/resources/azure_schemat.png)
 

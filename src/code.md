@@ -40,8 +40,30 @@ To run computation Pipeline locally you need to:
 * fill credentials
 * run `python3 Pipeline.py`
 
-## Local Flask app run
+Local pipeline usage doesn't need https requests. You can specify pipeline options by changing `__main__` section in `Pipeline.py` file.
+## Flask app host
+
+### Running app
 
 In case to run Flask application please:
 * make sure that You have `FLASK_APP` environment varialbe set
 * `flask run` command
+### Sending request
+
+After running the application, to test it's functionality you can send `curl` https request:
+
+```
+curl --location --request POST 'localhost' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: ARRAffinity=432ef3d4dab42dca9b00bb4c90a041b0d3d477d7dbfaf4534da5813ade4f9397; ARRAffinitySameSite=432ef3d4dab42dca9b00bb4c90a041b0d3d477d7dbfaf4534da5813ade4f9397' \
+--data-raw '{
+ "hashtag": "najman",
+ "limit": "10",
+ "fromDate": "2021-01-19",
+ "language": "pl"
+}'
+```
+
+* Section `--data-raw` specifies all keys that are needed to be specified before sending request.
+* In case to test app hosted on server please change localhost to server URL.
+* Please keep in mind that request might take a while before showing computation result.
