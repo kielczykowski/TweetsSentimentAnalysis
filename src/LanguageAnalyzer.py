@@ -133,10 +133,10 @@ class LanguageAnalyzer(TextAnalyticsClient):
             for item in item_list:
                 # neutral phrase has lower weight: 0.3
                 if item["sentiment"] == "neutral":
-                    sum_score += item["sentimentScore"]
+                    sum_score += 0.3 * item["sentimentScore"]
                     weight += 0.3
                 else:
-                    sum_score += item["sentimentScore"]
+                    sum_score += 1 * item["sentimentScore"]
                     weight += 1
 
             return sum_score / weight
