@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-
-import os
-from azure.ai.textanalytics import TextAnalyticsClient, DocumentError, DetectLanguageResult
+from azure.ai.textanalytics import TextAnalyticsClient
 from azure.core.credentials import AzureKeyCredential
+
+from src.config import config
 
 
 class LanguageAnalyzer(TextAnalyticsClient):
@@ -10,9 +10,9 @@ class LanguageAnalyzer(TextAnalyticsClient):
     def __init__(self, confidence_factor = 0.9, language='pl'):
         self.language_ = language
         self.confidence_ = confidence_factor
-        credentials = AzureKeyCredential(os.environ["AZURE_TEXT_ANALYTICS_KEY"])
+        credentials = AzureKeyCredential(config.AZURE_TEXT_ANALYTICS_KEY)
         super(LanguageAnalyzer, self).__init__(
-            endpoint=os.environ["AZURE_TEXT_ANALYTICS_ENDPOINT"],
+            endpoint=config.AZURE_TEXT_ANALYTICS_ENDPOINT,
             credential=credentials
         )
 

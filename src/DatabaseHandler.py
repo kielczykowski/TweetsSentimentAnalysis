@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-from pymongo import MongoClient
-import os
 import datetime
-import pprint
+from pymongo import MongoClient
+from src.config import config
+
 
 class DatabaseHandler(MongoClient):
     def __init__(self):
-        url = os.environ["AZURE_DATABASE_URL"]
+        url = config.AZURE_DATABASE_URL
         super(DatabaseHandler, self).__init__(url)
 
     def authenticate(self, db_name="ey"):
-        username = os.environ["AZURE_DATABASE_USER"]
-        password = os.environ["AZURE_DATABASE_PASSWORD"]
+        username = config.AZURE_DATABASE_USER
+        password = config.AZURE_DATABASE_PASSWORD
         db = getattr(self, db_name)
         db.authenticate(name = username, password = password)
         self.used_db = db

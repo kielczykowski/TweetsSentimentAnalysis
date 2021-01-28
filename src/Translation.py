@@ -1,12 +1,15 @@
-import requests, uuid, json
+import requests
+
+from src.config import config
+
 
 class Translator:
     def __init__(self):
-        self.subscription_key = "88390c3221394049b65cbd0297e94b79"
-        self.endpoint =  "https://api.cognitive.microsofttranslator.com"
-        self.location ="westeurope"
+        self.subscription_key = config.TRANSLATION_SUBSCRIPTION_KEY
+        self.endpoint = config.TRANSLATION_ENDPOINT
+        self.location = config.TRANSLATION_LOCATION
 # # Add your subscription key and endpoint
-# subscription_key = "88390c3221394049b65cbd0297e94b79"
+# subscription_key = ""
 # endpoint = "https://api.cognitive.microsofttranslator.com"
 
 # # Add your location, also known as region. The default is global.
@@ -30,7 +33,6 @@ class Translator:
             'Ocp-Apim-Subscription-Key': self.subscription_key,
             'Ocp-Apim-Subscription-Region': self.location,
             'Content-type': 'application/json',
-            'X-ClientTraceId': str(uuid.uuid4())
         }
 
         # You can pass more than one object in body.
