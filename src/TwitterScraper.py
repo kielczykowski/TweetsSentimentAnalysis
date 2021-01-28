@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 
-import importlib
-import tweepy
 from datetime import date, timedelta
-import json
-import os
+
+import tweepy
+
+from src.config import config
+
 
 class TwitterScraper:
     def __init__(self):
-        api_key = os.environ["TWITTER_API_KEY"]
-        api_secret_key = os.environ["TWITTER_API_SECRET_KEY"]
-        api_token = os.environ["TWITTER_API_TOKEN"]
-        api_secret_token = os.environ["TWITTER_API_SECRET_TOKEN"]
+        api_key = config.TWITTER_API_KEY
+        api_secret_key = config.TWITTER_API_SECRET_KEY
+        api_token = config.TWITTER_API_TOKEN
+        api_secret_token = config.TWITTER_API_SECRET_TOKEN
         auth = tweepy.OAuthHandler(api_key, api_secret_key)
         auth.set_access_token(api_token,  api_secret_token)
         self.api = tweepy.API(auth, wait_on_rate_limit=True)  # wait_on_rate_limit - waits until 15 minutes rate limit gets refreshed
