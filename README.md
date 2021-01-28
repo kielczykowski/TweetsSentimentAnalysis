@@ -46,3 +46,8 @@ Green color means positive sentiment, red negative and blue neutral.
 ## Code requirements
 
 Code requirements are presented in this [file](src/code.md)
+
+## Video about this project
+
+Short video (in polish) about how our project works is available under the following link:
+https://youtu.be/DK3mkhui43w
