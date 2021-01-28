@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-from TwitterScraper import TwitterScraper
-from DatabaseHandler import DatabaseHandler
-from LanguageAnalyzer import LanguageAnalyzer
+from src.TwitterScraper import TwitterScraper
+from src.DatabaseHandler import DatabaseHandler
+from src.LanguageAnalyzer import LanguageAnalyzer
 from datetime import date, timedelta
-from Translation import Translator
-from frazes_extraction_spacy import Extractor
+from src.Translation import Translator
+from src.frazes_extraction_spacy import Extractor
 
 import re
 
