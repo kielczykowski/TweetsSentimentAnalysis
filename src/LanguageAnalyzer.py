@@ -118,9 +118,9 @@ class LanguageAnalyzer(TextAnalyticsClient):
         return (-1 * confidence_scores.negative) + (1 * confidence_scores.positive)
 
     def defineSentiment(self, score):
-        if score <= -0.4:
+        if score <= -0.3:
             return "negative"
-        elif score >= 0.4:
+        elif score >= 0.3:
             return "positive"
         else:
             return "neutral"
@@ -133,8 +133,8 @@ class LanguageAnalyzer(TextAnalyticsClient):
             for item in item_list:
                 # neutral phrase has lower weight: 0.3
                 if item["sentiment"] == "neutral":
-                    sum_score += 0.3 * item["sentimentScore"]
-                    weight += 0.3
+                    sum_score += 0.1 * item["sentimentScore"]
+                    weight += 0.1
                 else:
                     sum_score += 1 * item["sentimentScore"]
                     weight += 1
